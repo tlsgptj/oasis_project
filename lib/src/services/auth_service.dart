@@ -32,9 +32,9 @@ class AuthService {
   }
 
   // 회원가입 메서드
-  Future<bool> signup(String nickname, String email, String password) async {
+  Future<bool> register(String nickname, String email, String password) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/members/signup/'),
+      Uri.parse('$baseUrl/members/register/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

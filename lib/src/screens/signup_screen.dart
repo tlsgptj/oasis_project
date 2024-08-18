@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import '../widgets/custom_text_field.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  SignupScreenState createState() => SignupScreenState();
+  RegisterScreenState createState() => RegisterScreenState();
 }
 
-class SignupScreenState extends State<SignupScreen> {
+class RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _nicknameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -18,7 +18,7 @@ class SignupScreenState extends State<SignupScreen> {
 
   final AuthService _authService = AuthService();
 
-  void _signUp() async {
+  void _register() async {
     String nickname = _nicknameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
@@ -29,7 +29,7 @@ class SignupScreenState extends State<SignupScreen> {
         password.isNotEmpty &&
         confirmPassword.isNotEmpty) {
       if (password == confirmPassword) {
-        bool success = await _authService.signup(nickname, email, password);
+        bool success = await _authService.register(nickname, email, password);
         if (!mounted) return;
         if (success) {
           Navigator.pushNamed(context, '/login');
@@ -83,7 +83,7 @@ class SignupScreenState extends State<SignupScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: _signUp,
+              onPressed: _register,
               child: const Text('Sign Up'),
             ),
             TextButton(
