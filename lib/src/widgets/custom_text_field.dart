@@ -6,7 +6,7 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
 
   const CustomTextField({
-    super.key, // 'key'를 super로 전달
+    super.key,
     required this.controller,
     required this.labelText,
     this.obscureText = false,
