@@ -7,6 +7,7 @@ import 'src/screens/my_reviews_screen.dart';
 import 'src/screens/card_register_screen.dart';
 import 'src/screens/transaction_list_screen.dart';
 import 'src/screens/mileage_screen.dart';
+import 'src/screens/splash_screen.dart'; // 스플래시 화면 import
 
 void main() {
   runApp(const MyApp());
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/members/login',
+      initialRoute: '/', // 초기 경로를 스플래시 화면으로 설정
       routes: {
+        '/': (context) => const SplashScreen(), // 스플래시 화면 경로
         '/members/login': (context) => const LoginScreen(),
         '/members/register': (context) => const RegisterScreen(),
         '/home': (context) => const HomeScreen(),
