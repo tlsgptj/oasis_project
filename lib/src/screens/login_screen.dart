@@ -63,7 +63,7 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/signup');
+                Navigator.pushNamed(context, '/members/register');
               },
               child: const Text('Create Account'),
             ),

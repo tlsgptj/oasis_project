@@ -88,7 +88,7 @@ class RegisterScreenState extends State<RegisterScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushNamed(context, '/members/login');
               },
               child: const Text('Sign In'),
             ),
