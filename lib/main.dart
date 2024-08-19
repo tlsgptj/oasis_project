@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'src/screens/login_screen.dart';
-import 'src/screens/signup_screen.dart';
+import 'src/screens/register_screen.dart';
 import 'src/screens/home_screen.dart';
 import 'src/screens/card_register_screen.dart';
 import 'src/screens/transaction_list_screen.dart';
@@ -20,12 +20,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login',
+      initialRoute: '/members/login',
       routes: {
-        '/login': (context) => const LoginScreen(),
-        '/signup': (context) => const SignupScreen(),
+        '/members/login': (context) => const LoginScreen(),
+        '/members/register': (context) => const RegisterScreen(),
         '/home': (context) => const HomeScreen(),
-        '/register': (context) => const CardRegisterScreen(),
+        '/cards/register': (context) => const CardRegisterScreen(),
         '/transactions': (context) => const TransactionListScreen(),
         '/mileage': (context) => const MileageScreen(),
       },
