@@ -1,8 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="BacktotheLocal"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- Kakao SDK 설정 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="5935197d91add8e6de7a54d2883e5b96"/> <!-- 네이티브 앱 키 -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
