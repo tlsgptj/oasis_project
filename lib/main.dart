@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterproject1/src/screens/review_register_screen.dart';
 import 'src/screens/login_screen.dart';
 import 'src/screens/register_screen.dart';
 import 'src/screens/home_screen.dart';
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
         '/cards/register': (context) => CardRecognizerScreen(),
         '/transactions': (context) => const TransactionListScreen(),
         '/mileage': (context) => const MileageScreen(),
+        '/review': (context) => ReviewPage(),
+        '/Myreview': (context) => const MyReviewsScreen()
       },
     );
   }
