@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
+import '../services/gifticon_service_api.dart';
 import '../model/gifticon_model.dart';
 
 class GifticonListScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class _GifticonListScreenState extends State<GifticonListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gifticons'),
+        title: Text('기프티콘'),
       ),
       body: FutureBuilder<List<Gifticon>>(
         future: futureGifticons,
@@ -28,9 +28,9 @@ class _GifticonListScreenState extends State<GifticonListScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
+            return Center(child: Text("에러: ${snapshot.error}"));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text("No gifticons available"));
+            return Center(child: Text("사용가능한 기프티콘이 존재하지 않습니다."));
           } else {
             return ListView.builder(
               itemCount: snapshot.data!.length,

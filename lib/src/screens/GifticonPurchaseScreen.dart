@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
+import '../services/gifticon_purchase_api.dart';
 
 class GifticonPurchaseScreen extends StatelessWidget {
   final int gifticonId;
@@ -10,7 +10,7 @@ class GifticonPurchaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Purchase Gifticon'),
+        title: Text('기프티콘 구매하기'),
       ),
       body: Center(
         child: ElevatedButton(
@@ -21,8 +21,8 @@ class GifticonPurchaseScreen extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Purchase Successful'),
-                    content: Text('Your barcode: $barcode'),
+                    title: Text('구매를 성공적으로 완료하였습니다.'),
+                    content: Text('바코드: $barcode'),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
