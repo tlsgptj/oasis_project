@@ -23,7 +23,7 @@
   <body>
     <div id="map"></div>
     <script>
-      // Flutter에서 제공하는 초기 좌표를 받기 위해 URL 파라미터를 읽습니다.
+      // URL 파라미터에서 값을 가져오는 함수
       function getQueryParams() {
         var params = {};
         var parser = document.createElement("a");
@@ -48,20 +48,32 @@
       };
       var map = new kakao.maps.Map(container, options);
 
-      // 마커 추가 예시 (Flutter에서 마커 데이터도 전달 가능)
+      // 마커 추가 함수
       function addMarker(lat, lng, title) {
         var marker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(lat, lng),
           title: title,
         });
+
+        var infowindow = new kakao.maps.InfoWindow({
+          content: '<div style="padding:5px;">' + title + "</div>",
+        });
+
+        kakao.maps.event.addListener(marker, "mouseover", function () {
+          infowindow.open(map, marker);
+        });
+
+        kakao.maps.event.addListener(marker, "mouseout", function () {
+          infowindow.close();
+        });
       }
 
-      // Flutter에서 전달된 마커 데이터를 처리하는 예시
+      // URL 파라미터로 전달된 마커 데이터를 처리
       if (params["markers"]) {
         var markers = JSON.parse(params["markers"]);
         markers.forEach(function (marker) {
-          addMarker(marker.lat, marker.lng, marker.title);
+          addMarker(marker.latitude, marker.longitude, marker.name);
         });
       }
     </script>
