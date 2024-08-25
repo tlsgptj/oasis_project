@@ -9,7 +9,7 @@ class SearchResultsScreen extends StatelessWidget {
   const SearchResultsScreen({required this.query, Key? key}) : super(key: key);
 
   Future<List<dynamic>> _searchPlace(String query) async {
-    final apiKey = '48099bab89eacdd4818a94e793e92b24';
+    final apiKey = '8cf7a1ef1d3dab95f8c2ee323076c1d9';
     final url =
         'https://dapi.kakao.com/v2/local/search/keyword.json?query=$query';
 

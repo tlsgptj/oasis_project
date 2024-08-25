@@ -9,6 +9,7 @@ import 'src/screens/card_register_screen.dart';
 import 'src/screens/transaction_list_screen.dart';
 import 'src/screens/mileage_screen.dart';
 import 'src/screens/splash_screen.dart';
+import 'src/screens/search_results_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         '/transactions': (context) => const TransactionListScreen(),
         '/mileage': (context) => const MileageScreen(),
         '/review': (context) => ReviewPage(),
-        '/Myreview': (context) => const MyReviewsScreen()
+        '/Myreview': (context) => const MyReviewsScreen(),
+        '/search_results': (context) => const SearchResultsScreen(query: ""),
       },
     );
   }

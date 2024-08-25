@@ -23,12 +23,47 @@
   <body>
     <div id="map"></div>
     <script>
+      // Flutter에서 제공하는 초기 좌표를 받기 위해 URL 파라미터를 읽습니다.
+      function getQueryParams() {
+        var params = {};
+        var parser = document.createElement("a");
+        parser.href = window.location.href;
+        var query = parser.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split("=");
+          params[pair[0]] = decodeURIComponent(pair[1]);
+        }
+        return params;
+      }
+
+      var params = getQueryParams();
+      var lat = parseFloat(params["lat"]) || 37.5665; // 기본 서울 좌표
+      var lng = parseFloat(params["lng"]) || 126.978; // 기본 서울 좌표
+
       var container = document.getElementById("map");
       var options = {
-        center: new kakao.maps.LatLng(37.5665, 126.978), // 서울 중심 좌표
+        center: new kakao.maps.LatLng(lat, lng),
         level: 3,
       };
       var map = new kakao.maps.Map(container, options);
+
+      // 마커 추가 예시 (Flutter에서 마커 데이터도 전달 가능)
+      function addMarker(lat, lng, title) {
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(lat, lng),
+          title: title,
+        });
+      }
+
+      // Flutter에서 전달된 마커 데이터를 처리하는 예시
+      if (params["markers"]) {
+        var markers = JSON.parse(params["markers"]);
+        markers.forEach(function (marker) {
+          addMarker(marker.lat, marker.lng, marker.title);
+        });
+      }
     </script>
   </body>
 </html>

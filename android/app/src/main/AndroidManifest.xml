@@ -1,9 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 권한 추가 -->
     <application
         android:label="BacktotheLocal"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"> <!-- SSL 인증서 없는 HTML 파일 로드 가능 -->
         <!-- Kakao SDK 설정 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
