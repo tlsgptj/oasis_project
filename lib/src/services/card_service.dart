@@ -2,10 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  final String baseUrl = 'http://your-django-server.com'; // Django 서버의 기본 URL
-
+  final String baseUrl = 'http://localhost:8000';
   Future<bool> registerCard(String userId, String cardNumber, String expiryDate, String cvc) async {
-    final url = Uri.parse('$baseUrl/api/register-card/'); // Django 서버의 카드 등록 API 엔드포인트
+    final url = Uri.parse('$baseUrl/register-card/');
     final response = await http.post(
       url,
       headers: {
