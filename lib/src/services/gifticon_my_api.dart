@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../model/gifticon_model.dart';
 
 class ApiService {
-  final String baseUrl = "http://your_django_backend_url/api";
+  final String baseUrl = "http://localhost:8000";
 
   Future<List<Gifticon>> fetchUserGifticons() async {
     final response = await http.get(Uri.parse('$baseUrl/my-gifticons/'));
