@@ -22,12 +22,16 @@ dependencies:
   camera_process: ^1.0.1
   webview_flutter: ^4.9.0
   flutter_svg: ^1.0.3
+  fl_chart: ^0.40.0
+  barcode: ^2.1.0
   webview_flutter_platform_interface: ^2.10.0
   webview_flutter_web: ^0.2.3
   webview_flutter_android: ^3.16.7
   webview_flutter_wkwebview: ^3.15.0
+  speech_to_text: ^5.4.0
   geolocator: ^13.0.1
   url_launcher: ^6.3.0
+  google_maps_flutter: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -42,3 +46,11 @@ flutter:
     - lib/src/assets/btn_return.svg
     - lib/src/assets/btn_search.svg
     - lib/src/assets/Coffee.svg
+    - lib/src/assets/Rectangle 21.png
+    - lib/src/assets/Rectangle 23.png
+    - lib/src/assets/Rectangle 24.png
+    - lib/src/assets/barcode.png
+    - lib/src/assets/barcode2.png
+    - lib/src/assets/barcode3.png
+    - lib/src/assets/barcode4.png
+    - lib/src/assets/barcode5.png
