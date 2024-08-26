@@ -26,6 +26,7 @@ class LoginScreenState extends State<LoginScreen> {
     String password = _passwordController.text;
 
     if (email.isNotEmpty && password.isNotEmpty) {
+      // 서버와의 통신 부분을 주석 처리하고 mock 데이터를 사용
       bool success = await _authService.login(email, password);
       if (!mounted) return;
       if (success) {
@@ -47,6 +48,7 @@ class LoginScreenState extends State<LoginScreen> {
         );
       }
       */
+  
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('모든 필드를 입력하세요')),
@@ -58,7 +60,7 @@ class LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign In'),
+        title: const Text('로그인'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -66,24 +68,42 @@ class LoginScreenState extends State<LoginScreen> {
           children: <Widget>[
             CustomTextField(
               controller: _emailController,
-              labelText: 'Email',
+              labelText: '이메일',
             ),
             const SizedBox(height: 16),
             CustomTextField(
               controller: _passwordController,
-              labelText: 'Password',
+              labelText: '비밀번호',
               obscureText: true,
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _signIn,
-              child: const Text('Sign In'),
+              child: const Text(
+                  '회원가입',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Noto Sans KR',
+                fontWeight: FontWeight.w500,
+                height: 0,
+                letterSpacing: 1.40,
+              ),),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
               },
-              child: const Text('Create Account'),
+              child: const Text(
+                  '회원가입',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Noto Sans KR',
+                fontWeight: FontWeight.w500,
+                height: 0,
+                letterSpacing: 1.40,
+              ),),
             ),
           ],
         ),

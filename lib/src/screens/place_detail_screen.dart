@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:url_launcher/url_launcher.dart'; // url_launcher 패키지 추가
+import 'package:url_launcher/url_launcher.dart';
 
 import 'search_results_screen.dart';
 
