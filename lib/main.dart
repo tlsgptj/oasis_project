@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterproject1/src/screens/ReviewFormScreen.dart';
 import 'package:flutterproject1/src/screens/review_register_screen.dart';
 import 'src/screens/login_screen.dart';
 import 'src/screens/register_screen.dart';
@@ -39,7 +40,17 @@ class MyApp extends StatelessWidget {
         '/review': (context) => ReviewScreen(),
         '/my_review': (context) => const MyReviewsScreen(),
         '/search_results': (context) => const SearchResultsScreen(query: ""),
+        '/ReviewForm': (context) => ReviewFormScreen(),
       },
     );
   }
 }
+
+
+
+
+
+
+
+
+
