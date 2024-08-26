@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import '../widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,15 +18,16 @@ class LoginScreenState extends State<LoginScreen> {
   final Map<String, String> _mockUserData = {
     'test@example.com': 'password123',
   };
-
   void _signIn() async {
     String email = _emailController.text;
     String password = _passwordController.text;
 
     if (email.isNotEmpty && password.isNotEmpty) {
+
       // 목데이터 검증
       if (_mockUserData.containsKey(email) && _mockUserData[email] == password) {
         if (!mounted) return;
+
         Navigator.pushNamed(context, '/home');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
