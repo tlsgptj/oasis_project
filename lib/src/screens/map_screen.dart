@@ -17,7 +17,7 @@ class MapScreen extends StatefulWidget {
 
 class MapScreenState extends State<MapScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  WebViewController? _controller;
+  late final WebViewController _controller;
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -91,11 +91,7 @@ class MapScreenState extends State<MapScreen> {
       ),
       body: kIsWeb
           ? const Center(child: Text('웹 환경에서 지도는 HTML로 직접 로드됩니다.'))
-          : (_controller != null
-              ? WebViewWidget(controller: _controller!)
-              : const Center(
-                  child: Text('This platform does not support WebView'),
-                )),
+          : WebViewWidget(controller: _controller),
       bottomNavigationBar: CustomNavigationBar(
         selectedIndex: null,
         scaffoldKey: _scaffoldKey,
@@ -115,10 +111,10 @@ class MapScreenState extends State<MapScreen> {
       final data = jsonDecode(response.body);
       return (data['response']['body']['items'] as List)
           .map((item) => {
-                'name': item['name'],
-                'latitude': double.parse(item['latitude']),
-                'longitude': double.parse(item['longitude']),
-              })
+        'name': item['name'],
+        'latitude': double.parse(item['latitude']),
+        'longitude': double.parse(item['longitude']),
+      })
           .toList();
     } else {
       throw Exception('Failed to load stores');
