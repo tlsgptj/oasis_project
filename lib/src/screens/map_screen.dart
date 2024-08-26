@@ -4,14 +4,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import '../widgets/custom_navigation_bar.dart';
 import 'search_results_screen.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
-
   @override
   MapScreenState createState() => MapScreenState();
 }
@@ -20,7 +18,6 @@ class MapScreenState extends State<MapScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   WebViewController? _controller;
   TextEditingController searchController = TextEditingController();
-  stt.SpeechToText _speechToText = stt.SpeechToText();
   bool _isListening = false;
   String _searchQuery = '';
 
@@ -83,28 +80,6 @@ class MapScreenState extends State<MapScreen> {
     }
   }
 
-  void _listen() async {
-    if (!_isListening) {
-      bool available = await _speechToText.initialize(
-        onStatus: (val) => print('onStatus: $val'),
-        onError: (val) => print('onError: $val'),
-      );
-      if (available) {
-        setState(() => _isListening = true);
-        _speechToText.listen(
-          onResult: (val) => setState(() {
-            _searchQuery = val.recognizedWords;
-            searchController.text = _searchQuery;
-          }),
-        );
-      }
-    } else {
-      setState(() => _isListening = false);
-      _speechToText.stop();
-      _searchPlace(); // Perform search when voice input is done
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,10 +89,6 @@ class MapScreenState extends State<MapScreen> {
           controller: searchController,
           decoration: InputDecoration(
             hintText: 'Search for a place...',
-            suffixIcon: IconButton(
-              icon: _isListening ? Icon(Icons.mic) : Icon(Icons.mic_none),
-              onPressed: _listen,
-            ),
           ),
         ),
       ),
