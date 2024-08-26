@@ -4,7 +4,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
-
 import '../widgets/custom_navigation_bar.dart';
 import 'search_results_screen.dart';
 
