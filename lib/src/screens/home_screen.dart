@@ -14,22 +14,26 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: const CustomEndDrawer(), // 햄버거 메뉴와 연결된 Drawer
       body: Container(
-        width: 393,
-        height: 852,
+        width: screenWidth,
+        height: screenHeight,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(color: Colors.white),
         child: Stack(
           children: [
             Positioned(
-              left: 266,
-              top: 87,
+              left: screenWidth * 0.68,
+              top: screenHeight * 0.1,
               child: Container(
-                width: 69,
-                height: 73,
+                width: screenWidth * 0.18,
+                height: screenHeight * 0.085,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage("https://via.placeholder.com/69x73"),
@@ -39,75 +43,64 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Positioned(
-              left: 38,
-              top: 90,
+              left: screenWidth * 0.1,
+              top: screenHeight * 0.11,
               child: Text(
                 'Test User님 \n방문을 환영합니다!',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: screenWidth * 0.05,
                   fontFamily: 'Noto Sans KR',
                   fontWeight: FontWeight.w500,
-                  height: 0,
-                  letterSpacing: 1.40,
+                  height: 1.5,
+                  letterSpacing: 1.4,
                 ),
               ),
             ),
             Positioned(
-              left: 29,
-              top: 157,
+              left: screenWidth * 0.075,
+              top: screenHeight * 0.2,
               child: Container(
-                width: 335,
-                height: 160,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 335,
-                      height: 160,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 3, color: Color(0xFFFFA40B)),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        shadows: [
-                          BoxShadow(
-                            color: Color(0xFFF2D4A7),
-                            blurRadius: 5,
-                            offset: Offset(0, 5),
-                            spreadRadius: 0,
-                          )
-                        ],
-                      ),
-                    ),
+                width: screenWidth * 0.85,
+                height: screenHeight * 0.19,
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 3, color: Color(0xFFFFA40B)),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  shadows: [
+                    BoxShadow(
+                      color: Color(0xFFF2D4A7),
+                      blurRadius: 5,
+                      offset: Offset(0, 5),
+                      spreadRadius: 0,
+                    )
                   ],
                 ),
               ),
             ),
             Positioned(
-              left: 51,
-              top: 172,
+              left: screenWidth * 0.13,
+              top: screenHeight * 0.22,
               child: Text(
                 '현재 마일리지',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: screenWidth * 0.05,
                   fontFamily: 'Noto Sans KR',
                   fontWeight: FontWeight.w500,
-                  height: 0,
-                  letterSpacing: 1.40,
+                  height: 1.5,
+                  letterSpacing: 1.4,
                 ),
               ),
             ),
             Positioned(
-              left: 255,
-              top: 278,
+              left: screenWidth * 0.65,
+              top: screenHeight * 0.33,
               child: Container(
-                width: 82,
-                height: 19,
+                width: screenWidth * 0.2,
+                height: screenHeight * 0.03,
                 padding: const EdgeInsets.only(right: 2),
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Colors.white.withOpacity(0)),
@@ -120,10 +113,10 @@ class HomeScreenState extends State<HomeScreen> {
                       '내역 보기',
                       style: TextStyle(
                         color: Color(0xFFFFA40B),
-                        fontSize: 15,
+                        fontSize: screenWidth * 0.04,
                         fontFamily: 'Noto Sans KR',
                         fontWeight: FontWeight.w500,
-                        height: 0,
+                        height: 1.5,
                         letterSpacing: 1.05,
                       ),
                     ),
@@ -132,20 +125,20 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Positioned(
-              left: 127,
-              top: 223,
+              left: screenWidth * 0.32,
+              top: screenHeight * 0.27,
               child: Container(
-                width: 210,
-                height: 34,
+                width: screenWidth * 0.53,
+                height: screenHeight * 0.04,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Colors.white.withOpacity(0)),
                 child: Stack(
                   children: [
                     Positioned(
                       left: 0,
-                      top: 33,
+                      top: screenHeight * 0.038,
                       child: Container(
-                        width: 210,
+                        width: screenWidth * 0.53,
                         decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
@@ -164,10 +157,10 @@ class HomeScreenState extends State<HomeScreen> {
                         '123,456 포인트',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 28,
+                          fontSize: screenWidth * 0.07,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
+                          height: 1.5,
                           letterSpacing: 1.96,
                         ),
                       ),
@@ -177,123 +170,123 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Positioned(
-              left: 29,
-              top: 482,
+              left: screenWidth * 0.075,
+              top: screenHeight * 0.57,
               child: Container(
-                width: 335,
-                height: 221,
+                width: screenWidth * 0.85,
+                height: screenHeight * 0.26,
                 child: Stack(
                   children: [
                     Positioned(
-                      left: 44,
-                      top: 57,
+                      left: screenWidth * 0.11,
+                      top: screenHeight * 0.08,
                       child: Text(
                         '1위',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 22,
+                          fontSize: screenWidth * 0.055,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
+                          height: 1.5,
                           letterSpacing: 1.54,
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 153,
-                      top: 57,
+                      left: screenWidth * 0.39,
+                      top: screenHeight * 0.08,
                       child: Text(
                         '○○ 떡볶이',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 22,
+                          fontSize: screenWidth * 0.055,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
+                          height: 1.5,
                           letterSpacing: 1.54,
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 153,
-                      top: 125,
+                      left: screenWidth * 0.39,
+                      top: screenHeight * 0.17,
                       child: Text(
                         '△△ 바리스타',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 22,
+                          fontSize: screenWidth * 0.055,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
+                          height: 1.5,
                           letterSpacing: 1.54,
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 153,
-                      top: 189,
+                      left: screenWidth * 0.39,
+                      top: screenHeight * 0.25,
                       child: Text(
                         '□□ 초밥 ',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 22,
+                          fontSize: screenWidth * 0.055,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
+                          height: 1.5,
                           letterSpacing: 1.54,
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 44,
-                      top: 123,
+                      left: screenWidth * 0.11,
+                      top: screenHeight * 0.17,
                       child: Text(
                         '2위',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 22,
+                          fontSize: screenWidth * 0.055,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
+                          height: 1.5,
                           letterSpacing: 1.54,
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 45,
-                      top: 189,
+                      left: screenWidth * 0.11,
+                      top: screenHeight * 0.25,
                       child: Text(
                         '3위',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 22,
+                          fontSize: screenWidth * 0.055,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
+                          height: 1.5,
                           letterSpacing: 1.54,
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 3,
+                      left: screenWidth * 0.01,
                       top: 0,
                       child: Text(
                         '가장 많이 이용한 가게는?',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 20,
+                          fontSize: screenWidth * 0.05,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
-                          letterSpacing: 1.40,
+                          height: 1.5,
+                          letterSpacing: 1.4,
                         ),
                       ),
                     ),
                     Positioned(
                       left: 0,
-                      top: 38,
+                      top: screenHeight * 0.044,
                       child: Container(
-                        width: 335,
+                        width: screenWidth * 0.85,
                         decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
@@ -306,10 +299,10 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Positioned(
-                      left: 17,
-                      top: 108,
+                      left: screenWidth * 0.045,
+                      top: screenHeight * 0.15,
                       child: Container(
-                        width: 300,
+                        width: screenWidth * 0.8,
                         decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
@@ -326,19 +319,19 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Positioned(
-              left: 291,
-              top: 706,
+              left: screenWidth * 0.74,
+              top: screenHeight * 0.82,
               child: Container(
-                width: 69,
-                height: 22,
+                width: screenWidth * 0.18,
+                height: screenHeight * 0.03,
                 child: Stack(
                   children: [
                     Positioned(
                       left: 0,
                       top: 3,
                       child: Container(
-                        width: 19,
-                        height: 19,
+                        width: screenWidth * 0.05,
+                        height: screenHeight * 0.022,
                         decoration: ShapeDecoration(
                           color: Color(0x00D9D9D9),
                           shape: OvalBorder(
@@ -348,16 +341,16 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Positioned(
-                      left: 25,
+                      left: screenWidth * 0.07,
                       top: 0,
                       child: Text(
                         '더보기',
                         style: TextStyle(
                           color: Color(0xFFFFA40B),
-                          fontSize: 15,
+                          fontSize: screenWidth * 0.04,
                           fontFamily: 'Noto Sans KR',
                           fontWeight: FontWeight.w500,
-                          height: 0,
+                          height: 1.5,
                           letterSpacing: 1.05,
                         ),
                       ),
@@ -367,27 +360,27 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Positioned(
-              left: 30,
-              top: 337,
+              left: screenWidth * 0.075,
+              top: screenHeight * 0.4,
               child: Container(
-                width: 334.96,
-                height: 130.48,
+                width: screenWidth * 0.85,
+                height: screenHeight * 0.15,
                 child: Stack(
                   children: [
                     Positioned(
-                      left: 227.38,
+                      left: screenWidth * 0.57,
                       top: 0,
                       child: Container(
-                        width: 107.59,
-                        height: 130.48,
+                        width: screenWidth * 0.27,
+                        height: screenHeight * 0.15,
                         child: Stack(
                           children: [
                             Positioned(
                               left: 0.33,
                               top: -0.16,
                               child: Container(
-                                width: 107.42,
-                                height: 126.05,
+                                width: screenWidth * 0.27,
+                                height: screenHeight * 0.15,
                                 decoration: ShapeDecoration(
                                   color: Colors.white,
                                   shape: RoundedRectangleBorder(
@@ -409,8 +402,8 @@ class HomeScreenState extends State<HomeScreen> {
                               left: 19.57,
                               top: 13.23,
                               child: Container(
-                                width: 68.94,
-                                height: 67.75,
+                                width: screenWidth * 0.18,
+                                height: screenHeight * 0.08,
                                 decoration: ShapeDecoration(
                                   color: Colors.white,
                                   shape: OvalBorder(
@@ -420,28 +413,28 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             Positioned(
-                              left: 35.07,
-                              top: 22.53,
+                              left: screenWidth * 0.09,
+                              top: screenHeight * 0.03,
                               child: Container(
-                                width: 41.62,
-                                height: 44.85,
+                                width: screenWidth * 0.12,
+                                height: screenHeight * 0.05,
                                 child: Stack(),
                               ),
                             ),
                             Positioned(
-                              left: 23.25,
-                              top: 87.62,
+                              left: screenWidth * 0.06,
+                              top: screenHeight * 0.1,
                               child: SizedBox(
-                                width: 65.86,
-                                height: 24.07,
+                                width: screenWidth * 0.18,
+                                height: screenHeight * 0.035,
                                 child: Text(
                                   '선물하기',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 15.26,
+                                    fontSize: screenWidth * 0.04,
                                     fontFamily: 'Noto Sans KR',
                                     fontWeight: FontWeight.w500,
-                                    height: 0,
+                                    height: 1.5,
                                     letterSpacing: 1.07,
                                   ),
                                 ),
@@ -452,19 +445,19 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Positioned(
-                      left: 112.16,
+                      left: screenWidth * 0.285,
                       top: 0,
                       child: Container(
-                        width: 105.30,
-                        height: 125.98,
+                        width: screenWidth * 0.27,
+                        height: screenHeight * 0.15,
                         child: Stack(
                           children: [
                             Positioned(
                               left: -0.29,
                               top: -0.10,
                               child: Container(
-                                width: 105.77,
-                                height: 124.12,
+                                width: screenWidth * 0.27,
+                                height: screenHeight * 0.14,
                                 decoration: ShapeDecoration(
                                   color: Colors.white,
                                   shape: RoundedRectangleBorder(
@@ -483,11 +476,11 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             Positioned(
-                              left: 18.65,
-                              top: 13.08,
+                              left: screenWidth * 0.047,
+                              top: screenHeight * 0.03,
                               child: Container(
-                                width: 67.88,
-                                height: 66.71,
+                                width: screenWidth * 0.18,
+                                height: screenHeight * 0.08,
                                 decoration: ShapeDecoration(
                                   color: Colors.white,
                                   shape: OvalBorder(
@@ -497,19 +490,19 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             Positioned(
-                              left: 19.44,
-                              top: 86.78,
+                              left: screenWidth * 0.05,
+                              top: screenHeight * 0.1,
                               child: SizedBox(
-                                width: 66.30,
-                                height: 22.50,
+                                width: screenWidth * 0.18,
+                                height: screenHeight * 0.035,
                                 child: Text(
                                   '제휴 쿠폰',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 15.26,
+                                    fontSize: screenWidth * 0.04,
                                     fontFamily: 'Noto Sans KR',
                                     fontWeight: FontWeight.w500,
-                                    height: 0,
+                                    height: 1.5,
                                     letterSpacing: 1.07,
                                   ),
                                 ),
@@ -521,18 +514,18 @@ class HomeScreenState extends State<HomeScreen> {
                     ),
                     Positioned(
                       left: 0,
-                      top: 2.25,
+                      top: screenHeight * 0.002,
                       child: Container(
-                        width: 102.24,
-                        height: 123.73,
+                        width: screenWidth * 0.26,
+                        height: screenHeight * 0.14,
                         child: Stack(
                           children: [
                             Positioned(
                               left: 0,
                               top: 0,
                               child: Container(
-                                width: 102.24,
-                                height: 122.08,
+                                width: screenWidth * 0.26,
+                                height: screenHeight * 0.14,
                                 decoration: ShapeDecoration(
                                   color: Colors.white,
                                   shape: RoundedRectangleBorder(
@@ -551,11 +544,11 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             Positioned(
-                              left: 18.31,
-                              top: 12.97,
+                              left: screenWidth * 0.045,
+                              top: screenHeight * 0.015,
                               child: Container(
-                                width: 65.62,
-                                height: 65.62,
+                                width: screenWidth * 0.17,
+                                height: screenHeight * 0.08,
                                 decoration: ShapeDecoration(
                                   color: Colors.white,
                                   shape: OvalBorder(
@@ -565,16 +558,16 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             Positioned(
-                              left: 22.13,
-                              top: 86.98,
+                              left: screenWidth * 0.06,
+                              top: screenHeight * 0.1,
                               child: Text(
                                 '기프티콘',
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 15.26,
+                                  fontSize: screenWidth * 0.04,
                                   fontFamily: 'Noto Sans KR',
                                   fontWeight: FontWeight.w500,
-                                  height: 0,
+                                  height: 1.5,
                                   letterSpacing: 1.07,
                                 ),
                               ),
@@ -589,20 +582,20 @@ class HomeScreenState extends State<HomeScreen> {
             ),
             Positioned(
               left: 0,
-              top: 743,
+              top: screenHeight * 0.87,
               child: Container(
-                width: 393,
-                height: 109,
+                width: screenWidth,
+                height: screenHeight * 0.13,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Colors.white.withOpacity(0)),
                 child: Stack(
                   children: [
                     Positioned(
                       left: 0,
-                      top: 26,
+                      top: screenHeight * 0.03,
                       child: Container(
-                        width: 393,
-                        height: 83,
+                        width: screenWidth,
+                        height: screenHeight * 0.1,
                         decoration: ShapeDecoration(
                           color: Color(0xFFF8E6C7),
                           shape: RoundedRectangleBorder(
@@ -623,11 +616,11 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Positioned(
-                      left: 163,
-                      top: 34,
+                      left: screenWidth * 0.42,
+                      top: screenHeight * 0.04,
                       child: Container(
-                        width: 67,
-                        height: 67,
+                        width: screenWidth * 0.18,
+                        height: screenHeight * 0.08,
                         decoration: ShapeDecoration(
                           shape: OvalBorder(
                             side: BorderSide(width: 3, color: Colors.white),
@@ -636,20 +629,20 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Positioned(
-                      left: 20,
-                      top: 48,
+                      left: screenWidth * 0.05,
+                      top: screenHeight * 0.06,
                       child: Container(
-                        width: 45,
-                        height: 45,
+                        width: screenWidth * 0.11,
+                        height: screenHeight * 0.06,
                         child: FlutterLogo(),
                       ),
                     ),
                     Positioned(
-                      left: 328,
-                      top: 43,
+                      left: screenWidth * 0.84,
+                      top: screenHeight * 0.05,
                       child: Container(
-                        width: 53,
-                        height: 53,
+                        width: screenWidth * 0.14,
+                        height: screenHeight * 0.08,
                         padding: const EdgeInsets.symmetric(horizontal: 4.42, vertical: 11.04),
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(),
@@ -666,11 +659,11 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Positioned(
-              left: 165,
-              top: 779,
+              left: screenWidth * 0.42,
+              top: screenHeight * 0.91,
               child: Container(
-                width: 63,
-                height: 63,
+                width: screenWidth * 0.16,
+                height: screenHeight * 0.08,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(),
                 child: FlutterLogo(),
