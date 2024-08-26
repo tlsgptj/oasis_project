@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         '/cards/register': (context) => const CardRegistrationScreen(),
         '/transactions': (context) => const TransactionListScreen(),
         '/mileage': (context) => const MileageScreen(),
-        '/review': (context) => ReviewPage(),
+        '/review': (context) => ReviewScreen(),
         '/my_review': (context) => const MyReviewsScreen(),
         '/search_results': (context) => const SearchResultsScreen(query: ""),
       },
