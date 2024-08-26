@@ -12,7 +12,14 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   final AuthService _authService = AuthService();
+
+  /*
+  final Map<String, String> _mockUserData = {
+    'test@example.com': 'password123',
+  };
+  */
 
   void _signIn() async {
     String email = _emailController.text;
@@ -29,6 +36,19 @@ class LoginScreenState extends State<LoginScreen> {
           const SnackBar(content: Text('로그인 실패')),
         );
       }
+
+      /*
+      if (_mockUserData.containsKey(email) &&
+          _mockUserData[email] == password) {
+        if (!mounted) return;
+        Navigator.pushNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('로그인 실패')),
+        );
+      }
+      */
+  
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('모든 필드를 입력하세요')),
