@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
         '/map': (context) => const MapScreen(),
         '/my_reviews': (context) => const MyReviewsScreen(),
-        '/cards/register': (context) => CardRecognizerScreen(),
+        '/cards/register': (context) => const CardRegistrationScreen(),
         '/transactions': (context) => const TransactionListScreen(),
         '/mileage': (context) => const MileageScreen(),
         '/review': (context) => ReviewPage(),
