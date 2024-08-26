@@ -21,7 +21,6 @@ class _UserGifticonListScreenState extends State<UserGifticonListScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize the futureGifticons with dummy data
     futureGifticons = _fetchDummyGifticons();
   }
 
