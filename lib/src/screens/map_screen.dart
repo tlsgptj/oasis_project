@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import '../widgets/custom_navigation_bar.dart';
 import 'search_results_screen.dart';
@@ -17,8 +18,11 @@ class MapScreen extends StatefulWidget {
 
 class MapScreenState extends State<MapScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  late final WebViewController _controller;
+  WebViewController? _controller;
   TextEditingController searchController = TextEditingController();
+  stt.SpeechToText _speechToText = stt.SpeechToText();
+  bool _isListening = false;
+  String _searchQuery = '';
 
   @override
   void initState() {
@@ -34,7 +38,6 @@ class MapScreenState extends State<MapScreen> {
     final lat = position.latitude;
     final lng = position.longitude;
 
-    // 한국조폐공사 API 호출
     final stores = await fetchStores(''); // 빈 검색어로 모든 가맹점 가져오기
     final markers = jsonEncode(stores);
 
@@ -55,7 +58,6 @@ class MapScreenState extends State<MapScreen> {
     await Geolocator.requestPermission();
   }
 
-  // HTML 파일의 URL을 생성하고, 현재 위치와 가맹점 데이터를 전달
   String _buildHtmlUrl(double lat, double lng, String markers) {
     final encodedMarkers = Uri.encodeComponent(markers);
     return 'file:///android_asset/flutter_assets/assets/kakao_map.html?lat=$lat&lng=$lng&markers=$encodedMarkers';
@@ -73,6 +75,28 @@ class MapScreenState extends State<MapScreen> {
     }
   }
 
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speechToText.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speechToText.listen(
+          onResult: (val) => setState(() {
+            _searchQuery = val.recognizedWords;
+            searchController.text = _searchQuery;
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speechToText.stop();
+      _searchPlace(); // Perform search when voice input is done
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,15 +107,19 @@ class MapScreenState extends State<MapScreen> {
           decoration: InputDecoration(
             hintText: 'Search for a place...',
             suffixIcon: IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: _searchPlace,
+              icon: _isListening ? Icon(Icons.mic) : Icon(Icons.mic_none),
+              onPressed: _listen,
             ),
           ),
         ),
       ),
       body: kIsWeb
           ? const Center(child: Text('웹 환경에서 지도는 HTML로 직접 로드됩니다.'))
-          : WebViewWidget(controller: _controller),
+          : (_controller != null
+          ? WebViewWidget(controller: _controller!)
+          : const Center(
+        child: Text('This platform does not support WebView'),
+      )),
       bottomNavigationBar: CustomNavigationBar(
         selectedIndex: null,
         scaffoldKey: _scaffoldKey,
@@ -100,10 +128,8 @@ class MapScreenState extends State<MapScreen> {
     );
   }
 
-  // 한국조폐공사 API 호출 함수
   Future<List<Map<String, dynamic>>> fetchStores(String query) async {
-    final apiKey =
-        'CjY2G0exMAK4XRLBfFit%2FYf3LF9xc%2BkfGgikPtsHbp%2BEyebnCWspd2eKlv7%2BvCJ9QDav4GmOVsGmrDyA2cDotg%3D%3D'; // 한국조폐공사 API 키
+    final apiKey = 'your_api_key_here';
     final response = await http.get(Uri.parse(
         'http://apis.data.go.kr/B190001/localFranchisesV2?serviceKey=$apiKey&type=json&keyword=$query'));
 
@@ -117,7 +143,7 @@ class MapScreenState extends State<MapScreen> {
       })
           .toList();
     } else {
-      throw Exception('Failed to load stores');
+      throw Exception('일치하는 가게가 없습니다.');
     }
   }
 }
