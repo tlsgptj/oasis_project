@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BacktotheLocal',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.yellow,
       ),
       initialRoute: '/',
       routes: {
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         '/transactions': (context) => const TransactionListScreen(),
         '/mileage': (context) => const MileageScreen(),
         '/review': (context) => ReviewPage(),
-        '/Myreview': (context) => const MyReviewsScreen(),
+        '/my_review': (context) => const MyReviewsScreen(),
         '/search_results': (context) => const SearchResultsScreen(query: ""),
       },
     );
