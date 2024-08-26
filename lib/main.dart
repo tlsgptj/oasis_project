@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         '/mileage': (context) => const MileageScreen(),
         '/review': (context) => ReviewScreen(),
         '/my_review': (context) => const MyReviewsScreen(),
-        '/search_results': (context) => const SearchResultsScreen(query: ""),
+        '/search_results': (context) => const SearchResultsScreen(query: "", stores: [],),
         '/ReviewForm': (context) => ReviewFormScreen(),
       },
     );
