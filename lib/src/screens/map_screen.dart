@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
 import '../widgets/custom_navigation_bar.dart';
@@ -18,10 +17,12 @@ class MapScreenState extends State<MapScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   WebViewController? _controller;
   TextEditingController searchController = TextEditingController();
+  List<Map<String, dynamic>> stores = [];
 
   @override
   void initState() {
     super.initState();
+    stores = _generateMockStores(); // 목데이터 생성
     if (!kIsWeb) {
       _initializeWebView();
       _requestLocationPermission();
@@ -34,9 +35,6 @@ class MapScreenState extends State<MapScreen> {
     final position = await _getCurrentLocation();
     final lat = position.latitude;
     final lng = position.longitude;
-
-    final stores = await fetchStores(''); // 빈 검색어로 모든 가맹점 가져오기
-    final markers = jsonEncode(stores);
 
     // Add the current location marker to the stores data
     stores.add({
@@ -96,15 +94,29 @@ class MapScreenState extends State<MapScreen> {
   }
 
   void _searchPlace() {
-    final query = searchController.text;
+    final query = searchController.text.toLowerCase();
     if (query.isNotEmpty) {
+      final filteredStores = stores.where((store) {
+        return store['name'].toLowerCase().contains(query);
+      }).toList();
+
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SearchResultsScreen(query: query),
+          builder: (context) => SearchResultsScreen(query: query, stores: filteredStores),
         ),
       );
     }
+  }
+
+  List<Map<String, dynamic>> _generateMockStores() {
+    return List.generate(30, (index) {
+      return {
+        'name': '상점 ${index + 1}',
+        'latitude': 37.5665 + index * 0.001,
+        'longitude': 126.9780 + index * 0.001,
+      };
+    });
   }
 
   @override
@@ -114,9 +126,10 @@ class MapScreenState extends State<MapScreen> {
       appBar: AppBar(
         title: TextField(
           controller: searchController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: '장소를 검색중입니다.',
           ),
+          onSubmitted: (value) => _searchPlace(),
         ),
       ),
       body: kIsWeb
@@ -137,23 +150,30 @@ class MapScreenState extends State<MapScreen> {
       ),
     );
   }
+}
 
-  Future<List<Map<String, dynamic>>> fetchStores(String query) async {
-    final apiKey = 'your_api_key_here';
-    final response = await http.get(Uri.parse(
-        'http://apis.data.go.kr/B190001/localFranchisesV2?serviceKey=$apiKey&type=json&keyword=$query'));
+class SearchResultsScreen extends StatelessWidget {
+  final String query;
+  final List<Map<String, dynamic>> stores;
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return (data['response']['body']['items'] as List)
-          .map((item) => {
-        'name': item['name'],
-        'latitude': double.parse(item['latitude']),
-        'longitude': double.parse(item['longitude']),
-      })
-          .toList();
-    } else {
-      throw Exception('스토어 로드 실패');
-    }
+  const SearchResultsScreen({required this.query, required this.stores, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('검색 결과: $query'),
+      ),
+      body: ListView.builder(
+        itemCount: stores.length,
+        itemBuilder: (context, index) {
+          final store = stores[index];
+          return ListTile(
+            title: Text(store['name']),
+            subtitle: Text('위도: ${store['latitude']}, 경도: ${store['longitude']}'),
+          );
+        },
+      ),
+    );
   }
 }

@@ -15,31 +15,18 @@ class LoginScreenState extends State<LoginScreen> {
 
   final AuthService _authService = AuthService();
 
-  /*
+  // 목데이터 추가
   final Map<String, String> _mockUserData = {
     'test@example.com': 'password123',
   };
-  */
 
   void _signIn() async {
     String email = _emailController.text;
     String password = _passwordController.text;
 
     if (email.isNotEmpty && password.isNotEmpty) {
-      // 서버와의 통신 부분을 주석 처리하고 mock 데이터를 사용
-      bool success = await _authService.login(email, password);
-      if (!mounted) return;
-      if (success) {
-        Navigator.pushNamed(context, '/home');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('로그인 실패')),
-        );
-      }
-
-      /*
-      if (_mockUserData.containsKey(email) &&
-          _mockUserData[email] == password) {
+      // 목데이터 검증
+      if (_mockUserData.containsKey(email) && _mockUserData[email] == password) {
         if (!mounted) return;
         Navigator.pushNamed(context, '/home');
       } else {
@@ -47,8 +34,6 @@ class LoginScreenState extends State<LoginScreen> {
           const SnackBar(content: Text('로그인 실패')),
         );
       }
-      */
-  
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('모든 필드를 입력하세요')),
@@ -59,53 +44,84 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('로그인'),
+        backgroundColor: Colors.orangeAccent, // AppBar 색상 설정
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            CustomTextField(
-              controller: _emailController,
-              labelText: '이메일',
-            ),
-            const SizedBox(height: 16),
-            CustomTextField(
-              controller: _passwordController,
-              labelText: '비밀번호',
-              obscureText: true,
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _signIn,
-              child: const Text(
+      body: SingleChildScrollView( // 스크롤뷰 추가
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, // 중앙에 배치
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                height: 200,
+                color: Colors.grey[300],
+                child: Center(
+                  child: Text(
+                    '다연아 이게 정녕 최선이었니',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontFamily: 'Noto Sans KR',
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32),
+              CustomTextField(
+                controller: _emailController,
+                labelText: '이메일',
+                backgroundColor: Colors.orange[100], // 텍스트 필드 배경색 설정
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                controller: _passwordController,
+                labelText: '비밀번호',
+                obscureText: true,
+                backgroundColor: Colors.orange[100], // 텍스트 필드 배경색 설정
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: _signIn,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orangeAccent, // 버튼 색상 설정
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: const Text(
+                  '로그인',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontFamily: 'Noto Sans KR',
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.4,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.orangeAccent, padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: const Text(
                   '회원가입',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontFamily: 'Noto Sans KR',
-                fontWeight: FontWeight.w500,
-                height: 0,
-                letterSpacing: 1.40,
-              ),),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/register');
-              },
-              child: const Text(
-                  '회원가입',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontFamily: 'Noto Sans KR',
-                fontWeight: FontWeight.w500,
-                height: 0,
-                letterSpacing: 1.40,
-              ),),
-            ),
-          ],
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontFamily: 'Noto Sans KR',
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.4,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
