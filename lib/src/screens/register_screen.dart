@@ -54,7 +54,7 @@ class RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        title: const Text('회원가입'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -62,35 +62,35 @@ class RegisterScreenState extends State<RegisterScreen> {
           children: <Widget>[
             CustomTextField(
               controller: _nicknameController,
-              labelText: 'Nickname',
+              labelText: '닉네임',
             ),
             const SizedBox(height: 16),
             CustomTextField(
               controller: _emailController,
-              labelText: 'Email',
+              labelText: '이메일',
             ),
             const SizedBox(height: 16),
             CustomTextField(
               controller: _passwordController,
-              labelText: 'Password',
+              labelText: '비밀번호',
               obscureText: true,
             ),
             const SizedBox(height: 16),
             CustomTextField(
               controller: _confirmPasswordController,
-              labelText: 'Confirm Password',
+              labelText: '비밀번호 확인',
               obscureText: true,
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _register,
-              child: const Text('Sign Up'),
+              child: const Text('회원가입 완료'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
               },
-              child: const Text('Sign In'),
+              child: const Text('로그인'),
             ),
           ],
         ),

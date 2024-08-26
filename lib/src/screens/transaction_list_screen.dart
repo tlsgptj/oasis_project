@@ -19,12 +19,12 @@ class TransactionListScreenState extends State<TransactionListScreen> {
   }
 
   void _fetchTransactions() async {
-    String userId = '1'; // 실제로는 로그인한 사용자의 ID를 사용
+    String userId = '1';
     List<dynamic> transactions = await _apiService.fetchTransactions(userId);
-    if (!mounted) return; // mounted 체크 추가
+    if (!mounted) return;
 
     setState(() {
-      _transactions = transactions;
+      _transactions = transactions.take(30).toList();
     });
   }
 
@@ -93,6 +93,7 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                             )
                           ],
                         ),
+                        child: FlutterLogo(), // 여기에 적절한 로고를 넣으세요.
                       ),
                     ),
                     Positioned(
