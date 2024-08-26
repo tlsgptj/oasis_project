@@ -14,17 +14,17 @@ class LoginScreenState extends State<LoginScreen> {
 
   final AuthService _authService = AuthService();
 
-  // 목데이터 추가
+  // Mock data
   final Map<String, String> _mockUserData = {
     'test@example.com': 'password123',
   };
+
   void _signIn() async {
     String email = _emailController.text;
     String password = _passwordController.text;
 
     if (email.isNotEmpty && password.isNotEmpty) {
-
-      // 목데이터 검증
+      // Validate with mock data
       if (_mockUserData.containsKey(email) && _mockUserData[email] == password) {
         if (!mounted) return;
 
@@ -47,13 +47,13 @@ class LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('로그인'),
-        backgroundColor: Colors.orangeAccent, // AppBar 색상 설정
+        backgroundColor: Colors.orangeAccent, // AppBar color
       ),
-      body: SingleChildScrollView( // 스크롤뷰 추가
+      body: SingleChildScrollView( // Add ScrollView
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // 중앙에 배치
+            mainAxisAlignment: MainAxisAlignment.center, // Center the content
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
@@ -71,23 +71,35 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 32),
-              CustomTextField(
+              TextField(
                 controller: _emailController,
-                labelText: '이메일',
-                backgroundColor: Colors.orange[100], // 텍스트 필드 배경색 설정
+                decoration: InputDecoration(
+                  labelText: '이메일',
+                  filled: true,
+                  fillColor: Colors.orange[100], // Background color
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
               ),
               const SizedBox(height: 16),
-              CustomTextField(
+              TextField(
                 controller: _passwordController,
-                labelText: '비밀번호',
                 obscureText: true,
-                backgroundColor: Colors.orange[100], // 텍스트 필드 배경색 설정
+                decoration: InputDecoration(
+                  labelText: '비밀번호',
+                  filled: true,
+                  fillColor: Colors.orange[100], // Background color
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
               ),
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: _signIn,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orangeAccent, // 버튼 색상 설정
+                  backgroundColor: Colors.orangeAccent, // Button color
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: const Text(
@@ -107,7 +119,8 @@ class LoginScreenState extends State<LoginScreen> {
                   Navigator.pushNamed(context, '/register');
                 },
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.orangeAccent, padding: const EdgeInsets.symmetric(vertical: 16),
+                  foregroundColor: Colors.orangeAccent,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: const Text(
                   '회원가입',

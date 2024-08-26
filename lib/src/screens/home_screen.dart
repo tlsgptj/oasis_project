@@ -27,7 +27,6 @@ class HomeScreenState extends State<HomeScreen> {
           decoration: const BoxDecoration(color: Colors.white),
           child: Stack(
             children: [
-              _buildProfileImage(screenWidth, screenHeight),
               _buildWelcomeText(screenWidth, screenHeight),
               _buildMileageBox(screenWidth, screenHeight),
               _buildMileageText(screenWidth, screenHeight),
@@ -44,23 +43,6 @@ class HomeScreenState extends State<HomeScreen> {
         selectedIndex: null,
         scaffoldKey: _scaffoldKey,
         isMapScreen: false,
-      ),
-    );
-  }
-
-  Positioned _buildProfileImage(double screenWidth, double screenHeight) {
-    return Positioned(
-      left: screenWidth * 0.68,
-      top: screenHeight * 0.1,
-      child: Container(
-        width: screenWidth * 0.18,
-        height: screenHeight * 0.085,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage("https://via.placeholder.com/69x73"),
-            fit: BoxFit.fill,
-          ),
-        ),
       ),
     );
   }
@@ -130,25 +112,30 @@ class HomeScreenState extends State<HomeScreen> {
     return Positioned(
       left: screenWidth * 0.65,
       top: screenHeight * 0.33,
-      child: Container(
-        width: screenWidth * 0.2,
-        height: screenHeight * 0.03,
-        padding: const EdgeInsets.only(right: 2),
-        decoration: const BoxDecoration(color: Colors.white),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '내역 보기',
-              style: TextStyle(
-                color: const Color(0xFFFFA40B),
-                fontSize: screenWidth * 0.04,
-                fontFamily: 'Noto Sans KR',
-                fontWeight: FontWeight.w500,
-                letterSpacing: 1.05,
+      child: GestureDetector(
+        onTap: () {
+          // Implement navigation to details page
+        },
+        child: Container(
+          width: screenWidth * 0.2,
+          height: screenHeight * 0.03,
+          padding: const EdgeInsets.only(right: 2),
+          decoration: const BoxDecoration(color: Colors.white),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '내역 보기',
+                style: TextStyle(
+                  color: const Color(0xFFFFA40B),
+                  fontSize: screenWidth * 0.04,
+                  fontFamily: 'Noto Sans KR',
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 1.05,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -262,41 +249,6 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Positioned _buildShopRankText(double screenWidth, double screenHeight,
-      double topPosition, String rank, String shopName) {
-    return Positioned(
-      left: screenWidth * 0.11,
-      top: screenHeight * topPosition,
-      child: Row(
-        children: [
-          Text(
-            rank,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: screenWidth * 0.055,
-              fontFamily: 'Noto Sans KR',
-              fontWeight: FontWeight.w500,
-              height: 1.5,
-              letterSpacing: 1.54,
-            ),
-          ),
-          SizedBox(width: screenWidth * 0.25),
-          Text(
-            shopName,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: screenWidth * 0.055,
-              fontFamily: 'Noto Sans KR',
-              fontWeight: FontWeight.w500,
-              height: 1.5,
-              letterSpacing: 1.54,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Positioned _buildMoreButton(double screenWidth, double screenHeight) {
     return Positioned(
       left: screenWidth * 0.74,
@@ -314,7 +266,7 @@ class HomeScreenState extends State<HomeScreen> {
                 height: screenHeight * 0.022,
                 decoration: ShapeDecoration(
                   color: const Color(0x00D9D9D9),
-                  shape: OvalBorder(
+                  shape: const OvalBorder(
                     side: BorderSide(width: 1, color: Color(0xFFFFA40B)),
                   ),
                 ),
@@ -345,78 +297,54 @@ class HomeScreenState extends State<HomeScreen> {
     return Positioned(
       left: screenWidth * 0.075,
       top: screenHeight * 0.4,
-      child: Container(
-        width: screenWidth * 0.85,
-        height: screenHeight * 0.15,
-        child: Stack(
-          children: [
-            _buildGiftOption(screenWidth, screenHeight, 0.57, '선물하기'),
-            _buildGiftOption(screenWidth, screenHeight, 0.285, '제휴 쿠폰'),
-            _buildGiftOption(screenWidth, screenHeight, 0, '기프티콘'),
-          ],
-        ),
+      child: Column(
+        children: [
+          _buildGiftOption(screenWidth, screenHeight, 0, '선물하기'),
+          const SizedBox(height: 16),
+          _buildGiftOption(screenWidth, screenHeight, 0, '제휴 쿠폰'),
+          const SizedBox(height: 16),
+          _buildGiftOption(screenWidth, screenHeight, 0, '기프티콘',
+        ],
       ),
     );
   }
 
-  Positioned _buildGiftOption(
-      double screenWidth, double screenHeight, double leftPosition, String label) {
-    return Positioned(
-      left: screenWidth * leftPosition,
-      top: 0,
+  Widget _buildGiftOption(double screenWidth, double screenHeight, double leftPosition, String label) {
+    return GestureDetector(
+      onTap: () {
+        // Implement navigation logic for each gift option
+      },
       child: Container(
-        width: screenWidth * 0.27,
+        width: screenWidth * 0.85,
         height: screenHeight * 0.15,
-        child: Stack(
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 1.53, color: Color(0xFFFCBD52)),
+            borderRadius: BorderRadius.circular(22.89),
+          ),
+          shadows: [
+            const BoxShadow(
+              color: Color(0x3F000000),
+              blurRadius: 3.05,
+              offset: Offset(0, 3.05),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Positioned(
-              left: 0.33,
-              top: -0.16,
-              child: Container(
-                width: screenWidth * 0.27,
-                height: screenHeight * 0.15,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1.53, color: Color(0xFFFCBD52)),
-                    borderRadius: BorderRadius.circular(22.89),
-                  ),
-                  shadows: [
-                    BoxShadow(
-                      color: Color(0x3F000000),
-                      blurRadius: 3.05,
-                      offset: Offset(0, 3.05),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              left: screenWidth * 0.09,
-              top: screenHeight * 0.03,
-              child: Container(
-                width: screenWidth * 0.12,
-                height: screenHeight * 0.05,
-                child: const FlutterLogo(),
-              ),
-            ),
-            Positioned(
-              left: screenWidth * 0.06,
-              top: screenHeight * 0.1,
-              child: SizedBox(
-                width: screenWidth * 0.18,
-                height: screenHeight * 0.035,
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: screenWidth * 0.04,
-                    fontFamily: 'Noto Sans KR',
-                    fontWeight: FontWeight.w500,
-                    height: 1.5,
-                    letterSpacing: 1.07,
-                  ),
-                ),
+            Icon(Icons.card_giftcard, color: Colors.orange, size: 40),
+            SizedBox(width: screenWidth * 0.05),
+            Text(
+              label,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: screenWidth * 0.05,
+                fontFamily: 'Noto Sans KR',
+                fontWeight: FontWeight.w500,
+                height: 1.5,
+                letterSpacing: 1.4,
               ),
             ),
           ],
@@ -425,4 +353,3 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

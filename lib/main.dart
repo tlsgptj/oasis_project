@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterproject1/src/screens/GiftListScreen.dart';
 import 'package:flutterproject1/src/screens/ReviewFormScreen.dart';
 import 'package:flutterproject1/src/screens/card_my_screen.dart';
+import 'package:flutterproject1/src/screens/gifticon_my_screen.dart';
 import 'package:flutterproject1/src/screens/review_register_screen.dart';
 import 'src/screens/login_screen.dart';
 import 'src/screens/register_screen.dart';
@@ -43,6 +45,9 @@ class MyApp extends StatelessWidget {
         '/my_review': (context) => const MyReviewsScreen(),
         '/search_results': (context) => const SearchResultsScreen(query: "", stores: [],),
         '/ReviewForm': (context) => ReviewFormScreen(),
+        '/Mygifticon': (context) => UserGifticonListScreen(),
+        '/gifticons': (context) => GifticonScreen(),
+
       },
     );
   }
