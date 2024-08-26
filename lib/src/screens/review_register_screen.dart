@@ -72,7 +72,7 @@ class ReviewScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       image: DecorationImage(
-                        image: NetworkImage('https://via.placeholder.com/150'),
+                        image: AssetImage('lib/src/assets/Rectangle 21.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -85,7 +85,7 @@ class ReviewScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       image: DecorationImage(
-                        image: NetworkImage('https://via.placeholder.com/150'),
+                        image: AssetImage('lib/src/assets/Rectangle 23.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -98,7 +98,7 @@ class ReviewScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       image: DecorationImage(
-                        image: NetworkImage('https://via.placeholder.com/150'),
+                        image: AssetImage('lib/src/assets/Rectangle 24.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
