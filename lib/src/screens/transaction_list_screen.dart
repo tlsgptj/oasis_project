@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
 
 class TransactionListScreen extends StatefulWidget {
   const TransactionListScreen({super.key});
@@ -9,22 +8,26 @@ class TransactionListScreen extends StatefulWidget {
 }
 
 class TransactionListScreenState extends State<TransactionListScreen> {
-  final ApiService _apiService = ApiService();
-  List<dynamic> _transactions = [];
+  List<Map<String, String>> _transactions = [];
 
   @override
   void initState() {
     super.initState();
-    _fetchTransactions();
+    _generateMockData();
   }
 
-  void _fetchTransactions() async {
-    String userId = '1';
-    List<dynamic> transactions = await _apiService.fetchTransactions(userId);
-    if (!mounted) return;
+  void _generateMockData() {
+    List<Map<String, String>> mockData = List.generate(30, (index) {
+      return {
+        'merchant_name': '상점 $index',
+        'amount': '${(index + 1) * 1000}원',
+        'transaction_date': '2024-08-26',
+        'transaction_type': index % 2 == 0 ? 'Purchase' : 'Refund',
+      };
+    });
 
     setState(() {
-      _transactions = transactions.take(30).toList();
+      _transactions = mockData;
     });
   }
 
@@ -93,7 +96,7 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                             )
                           ],
                         ),
-                        child: FlutterLogo(), // 여기에 적절한 로고를 넣으세요.
+                        child: FlutterLogo(),
                       ),
                     ),
                     Positioned(
@@ -147,7 +150,6 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                   fontSize: 28,
                   fontFamily: 'Noto Sans KR',
                   fontWeight: FontWeight.w700,
-                  height: 0,
                   letterSpacing: 1.96,
                 ),
               ),
@@ -196,7 +198,6 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                                 fontSize: 18,
                                 fontFamily: 'Noto Sans KR',
                                 fontWeight: FontWeight.w400,
-                                height: 0,
                                 letterSpacing: 1.26,
                               ),
                             ),
@@ -207,7 +208,6 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                                 fontSize: 20,
                                 fontFamily: 'Noto Sans KR',
                                 fontWeight: FontWeight.w500,
-                                height: 0,
                                 letterSpacing: 1.40,
                               ),
                             ),
@@ -228,7 +228,6 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                                 fontSize: 18,
                                 fontFamily: 'Noto Sans KR',
                                 fontWeight: FontWeight.w400,
-                                height: 0,
                                 letterSpacing: 1.26,
                               ),
                             ),
@@ -239,7 +238,6 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                                 fontSize: 20,
                                 fontFamily: 'Noto Sans KR',
                                 fontWeight: FontWeight.w500,
-                                height: 0,
                                 letterSpacing: 1.40,
                               ),
                             ),
@@ -250,7 +248,6 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                                 fontSize: 18,
                                 fontFamily: 'Noto Sans KR',
                                 fontWeight: FontWeight.w500,
-                                height: 0,
                                 letterSpacing: 1.26,
                               ),
                             ),
@@ -290,7 +287,7 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          transaction['merchant_name'],
+                          transaction['merchant_name']!,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -298,7 +295,7 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          '${transaction['amount']}원',
+                          '${transaction['amount']}',
                           style: TextStyle(
                             fontSize: 16,
                             color: transaction['transaction_type'] == 'Refund'
@@ -308,7 +305,7 @@ class TransactionListScreenState extends State<TransactionListScreen> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          transaction['transaction_date'],
+                          transaction['transaction_date']!,
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
