@@ -41,9 +41,17 @@ class MapScreenState extends State<MapScreen> {
     final stores = await fetchStores(''); // 빈 검색어로 모든 가맹점 가져오기
     final markers = jsonEncode(stores);
 
+    // Add the current location marker to the stores data
+    stores.add({
+      'name': '현재 위치',
+      'latitude': lat,
+      'longitude': lng,
+      'isCurrentLocation': true
+    });
+
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(_buildHtmlUrl(lat, lng, markers)));
+      ..loadRequest(Uri.parse(_buildHtmlUrl(lat, lng, jsonEncode(stores))));
   }
 
   Future<Position> _getCurrentLocation() async {
