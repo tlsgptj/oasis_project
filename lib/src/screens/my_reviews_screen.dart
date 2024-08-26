@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterproject1/src/screens/review_register_screen.dart';
 
 class MyReviewsScreen extends StatefulWidget {
   const MyReviewsScreen({super.key});
@@ -18,7 +19,7 @@ class _MyReviewsScreenState extends State<MyReviewsScreen> {
 
   Future<List<Review>> fetchReviews() async {
     // 서버 대신 목업 데이터를 반환
-    await Future.delayed(Duration(seconds: 1)); // 서버 지연을 시뮬레이션
+    await Future.delayed(const Duration(seconds: 1)); // 서버 지연을 시뮬레이션
     return [
       Review(title: '멋진 카페', content: '아늑하고 분위기 있는 카페였습니다.', date: '2024-08-01'),
       Review(title: '좋은 레스토랑', content: '음식이 정말 맛있었어요.', date: '2024-08-02'),
@@ -26,6 +27,20 @@ class _MyReviewsScreenState extends State<MyReviewsScreen> {
       Review(title: '아쉬운 경험', content: '기대에 미치지 못했어요.', date: '2024-08-04'),
       Review(title: '재방문 의사 있음', content: '다시 가고 싶어요!', date: '2024-08-05'),
     ];
+  }
+
+  Future<void> _navigateToAddReviewScreen() async {
+    final newReview = await Navigator.of(context).push(
+      MaterialPageRoute<Review>(
+        builder: (context) => ReviewScreen(),
+      ),
+    );
+
+    if (newReview != null) {
+      setState(() {
+        _reviews = _reviews.then((reviews) => [...reviews, newReview]);
+      });
+    }
   }
 
   @override
@@ -61,6 +76,10 @@ class _MyReviewsScreenState extends State<MyReviewsScreen> {
             );
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _navigateToAddReviewScreen,
+        child: const Icon(Icons.add),
       ),
     );
   }

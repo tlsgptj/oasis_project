@@ -31,7 +31,16 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('카드 등록'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text(
+          '카드 등록',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0xFFFFA40B)),
           onPressed: () {
@@ -39,7 +48,7 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
           },
         ),
       ),
-      body: SingleChildScrollView( // 스크롤뷰 추가
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -47,8 +56,16 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Colors.blue[100],
-                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.blue[50],
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 3,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
                 child: Column(
                   children: [
@@ -69,10 +86,18 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
                     const SizedBox(height: 16),
                     TextField(
                       controller: _cardNumberController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: '카드번호',
+                        labelStyle: TextStyle(color: Colors.blue),
                         hintText: '0000 - 0000 - 0000 - 0000',
-                        border: OutlineInputBorder(),
+                        hintStyle: TextStyle(color: Colors.grey[400]),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                       keyboardType: TextInputType.number,
                     ),
@@ -82,10 +107,18 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
                         Expanded(
                           child: TextField(
                             controller: _expiryDateController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: '유효기간',
+                              labelStyle: TextStyle(color: Colors.blue),
                               hintText: 'MM/YY',
-                              border: OutlineInputBorder(),
+                              hintStyle: TextStyle(color: Colors.grey[400]),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
                             keyboardType: TextInputType.datetime,
                           ),
@@ -94,10 +127,18 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
                         Expanded(
                           child: TextField(
                             controller: _cvcController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: 'CVC',
+                              labelStyle: TextStyle(color: Colors.blue),
                               hintText: '카드 뒷면 3자리',
-                              border: OutlineInputBorder(),
+                              hintStyle: TextStyle(color: Colors.grey[400]),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
                             obscureText: true,
                             keyboardType: TextInputType.number,
@@ -112,8 +153,9 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Colors.blue[50],
-                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.blue[200]!),
                 ),
                 child: Column(
                   children: [
@@ -122,6 +164,8 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
                       onChanged: _toggleAgreement,
                       title: const Text('전체 약관 동의'),
                       controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: Colors.blue,
+                      checkColor: Colors.white,
                     ),
                     const Divider(),
                     CheckboxListTile(
@@ -129,18 +173,24 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
                       onChanged: _toggleAgreement,
                       title: const Text('카드 번호 데이터 수집 및 이용 동의'),
                       controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: Colors.blue,
+                      checkColor: Colors.white,
                     ),
                     CheckboxListTile(
                       value: _allAgreed,
                       onChanged: _toggleAgreement,
                       title: const Text('카드 이용 내역 정보 제공 동의'),
                       controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: Colors.blue,
+                      checkColor: Colors.white,
                     ),
                     CheckboxListTile(
                       value: _allAgreed,
                       onChanged: _toggleAgreement,
                       title: const Text('카드사로부터 개인정보 수집 및 이용 동의'),
                       controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: Colors.blue,
+                      checkColor: Colors.white,
                     ),
                   ],
                 ),
@@ -189,5 +239,9 @@ class _CardRegistrationScreenState extends State<CardRegistrationScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('카드 등록이 완료되었습니다.')),
     );
+    Future.delayed(const Duration(seconds: 1), () {
+      // Navigate to the desired screen, replace '/home' with your route
+      Navigator.pushReplacementNamed(context, '/mycard');
+    });
   }
 }

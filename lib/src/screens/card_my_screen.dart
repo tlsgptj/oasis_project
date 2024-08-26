@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'card_transactions_screen.dart'; // Import the new screen
 
 class ManageCardScreen extends StatelessWidget {
   const ManageCardScreen({super.key});
@@ -75,10 +76,14 @@ class ManageCardScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // 카드 내역보기 로직
+                    // Navigate to the card transactions screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const CardTransactionsScreen()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFBFDFFF),
+                    backgroundColor: const Color(0xFFBFDFFF),
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -114,7 +119,7 @@ class ManageCardScreen extends StatelessWidget {
                   // 카드 등록하기 로직
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFBFDFFF),
+                  backgroundColor: const Color(0xFFBFDFFF),
                   padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

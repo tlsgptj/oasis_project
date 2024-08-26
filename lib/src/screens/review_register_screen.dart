@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterproject1/src/screens/review_detail.dart';
 
 class ReviewScreen extends StatelessWidget {
   @override
@@ -112,7 +113,11 @@ class ReviewScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // 리뷰 작성 버튼 클릭 시 동작
+                    // Navigate to WriteReviewScreen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => WriteReviewScreen()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
