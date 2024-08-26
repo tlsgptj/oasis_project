@@ -23,6 +23,7 @@ dependencies:
   webview_flutter: ^4.9.0
   flutter_svg: ^1.0.3
   fl_chart: ^0.40.0
+  barcode: ^2.1.0
   webview_flutter_platform_interface: ^2.10.0
   webview_flutter_web: ^0.2.3
   webview_flutter_android: ^3.16.7
