@@ -249,6 +249,37 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // _buildShopRankText 메서드 추가
+  Positioned _buildShopRankText(double screenWidth, double screenHeight, double topPosition, String rank, String shopName) {
+    return Positioned(
+      left: screenWidth * 0.12,
+      top: screenHeight * topPosition,
+      child: Row(
+        children: [
+          Text(
+            rank,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: screenWidth * 0.05,
+              fontFamily: 'Noto Sans KR',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(width: screenWidth * 0.05),
+          Text(
+            shopName,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: screenWidth * 0.05,
+              fontFamily: 'Noto Sans KR',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Positioned _buildMoreButton(double screenWidth, double screenHeight) {
     return Positioned(
       left: screenWidth * 0.74,
@@ -303,7 +334,7 @@ class HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 16),
           _buildGiftOption(screenWidth, screenHeight, 0, '제휴 쿠폰'),
           const SizedBox(height: 16),
-          _buildGiftOption(screenWidth, screenHeight, 0, '기프티콘',
+          _buildGiftOption(screenWidth, screenHeight, 0, '기프티콘'),
         ],
       ),
     );

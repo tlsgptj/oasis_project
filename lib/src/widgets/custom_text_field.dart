@@ -4,12 +4,36 @@ import '../services/auth_service.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
-  const CustomTextField({
-    super.key,
-    required this.controller,
-    required this.labelText,
-    this.obscureText = false, Color? backgroundColor,
-  });
+  @override
+  LoginScreenState createState() => LoginScreenState();
+}
+
+class LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final AuthService _authService = AuthService();
+
+  void _signIn() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    if (email.isNotEmpty && password.isNotEmpty) {
+      bool success = await _authService.login(email, password);
+      if (!mounted) return;
+      if (success) {
+        Navigator.pushNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('로그인 실패')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('모든 필드를 입력하세요')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,30 +61,30 @@ class LoginScreen extends StatefulWidget {
                 constraints: const BoxConstraints(maxWidth: 300),
                 child: TextField(
                   controller: _emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: '이메일',
                     filled: true,
-                    fillColor: const Color(0xFFF8E6C7), // 배경색 설정
-                    prefixIcon: const Icon(Icons.email,
-                        color: Color(0xFFFDB132)), // 아이콘 설정
+                    fillColor: Color(0xFFF8E6C7), // 배경색 설정
+                    prefixIcon:
+                    Icon(Icons.email, color: Color(0xFFFDB132)), // 아이콘 설정
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
-                          color: Color(0xFFFDB132)), // 기본 테두리 색상
+                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      borderSide:
+                      BorderSide(color: Color(0xFFFDB132)), // 기본 테두리 색상
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
+                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      borderSide: BorderSide(
                           color: Color(0xFFFDB132)), // 비활성화 상태 테두리 색상
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
+                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      borderSide: BorderSide(
                           color: Color(0xFFFDB132),
                           width: 2.0), // 포커스 상태 테두리 색상
                     ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 12),
+                    contentPadding:
+                    EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   ),
                 ),
               ),
@@ -71,30 +95,30 @@ class LoginScreen extends StatefulWidget {
                 child: TextField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: '비밀번호',
                     filled: true,
-                    fillColor: const Color(0xFFF8E6C7), // 배경색 설정
-                    prefixIcon: const Icon(Icons.lock,
-                        color: Color(0xFFFDB132)), // 아이콘 설정
+                    fillColor: Color(0xFFF8E6C7), // 배경색 설정
+                    prefixIcon:
+                    Icon(Icons.lock, color: Color(0xFFFDB132)), // 아이콘 설정
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
-                          color: Color(0xFFFDB132)), // 기본 테두리 색상
+                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      borderSide:
+                      BorderSide(color: Color(0xFFFDB132)), // 기본 테두리 색상
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
+                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      borderSide: BorderSide(
                           color: Color(0xFFFDB132)), // 비활성화 상태 테두리 색상
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: const BorderSide(
+                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      borderSide: BorderSide(
                           color: Color(0xFFFDB132),
                           width: 2.0), // 포커스 상태 테두리 색상
                     ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 12),
+                    contentPadding:
+                    EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   ),
                 ),
               ),
@@ -107,7 +131,9 @@ class LoginScreen extends StatefulWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFDB132), // 버튼 색상 설정
                     padding:
-                        const EdgeInsets.symmetric(vertical: 16), // 버튼 패딩 설정
+                    const EdgeInsets.symmetric(vertical: 16), // 버튼 패딩 설정
+                    minimumSize:
+                    const Size(double.infinity, 50), // 버튼 크기를 텍스트 필드와 맞춤
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30), // 버튼 둥근 모서리
                     ),
@@ -118,28 +144,31 @@ class LoginScreen extends StatefulWidget {
               ),
               const SizedBox(height: 16),
               // OR 텍스트와 Divider
-              Row(
-                children: [
-                  const Expanded(
-                    child: Divider(
-                      color: Colors.grey,
-                      thickness: 1,
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 300),
+                child: Row(
+                  children: [
+                    const Expanded(
+                      child: Divider(
+                        color: Colors.grey,
+                        thickness: 1,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text(
-                      'OR',
-                      style: TextStyle(color: Colors.grey),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(
+                        'OR',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     ),
-                  ),
-                  const Expanded(
-                    child: Divider(
-                      color: Colors.grey,
-                      thickness: 1,
+                    const Expanded(
+                      child: Divider(
+                        color: Colors.grey,
+                        thickness: 1,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 16),
               // 회원가입 버튼
@@ -152,7 +181,9 @@ class LoginScreen extends StatefulWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFDB132), // 버튼 색상 설정
                     padding:
-                        const EdgeInsets.symmetric(vertical: 16), // 버튼 패딩 설정
+                    const EdgeInsets.symmetric(vertical: 16), // 버튼 패딩 설정
+                    minimumSize:
+                    const Size(double.infinity, 50), // 버튼 크기를 텍스트 필드와 맞춤
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30), // 버튼 둥근 모서리
                     ),

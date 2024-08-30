@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_navigation_bar.dart';
-import 'search_results_screen.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
